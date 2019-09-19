@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace InlandMarinaLtd
 {
-    public partial class About : Page
+    public partial class Docks_Slip : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
