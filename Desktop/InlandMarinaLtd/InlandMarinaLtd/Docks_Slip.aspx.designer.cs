@@ -10,7 +10,7 @@
 namespace InlandMarinaLtd {
     
     
-    public partial class About {
+    public partial class Docks_Slip {
         
         /// <summary>
         /// ddlDock control.
@@ -22,12 +22,30 @@ namespace InlandMarinaLtd {
         protected global::System.Web.UI.WebControls.DropDownList ddlDock;
         
         /// <summary>
-        /// ObjectDataSource1 control.
+        /// ObjectDataSourceDock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
+        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceDock;
+        
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
+        
+        /// <summary>
+        /// ObjectDataSourceSlip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSourceSlip;
     }
 }
