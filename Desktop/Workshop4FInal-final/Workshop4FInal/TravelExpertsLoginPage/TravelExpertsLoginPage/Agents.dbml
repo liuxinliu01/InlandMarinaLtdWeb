@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TravelExperts" Class="AgentsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\sqlexpress;Initial Catalog=TravelExperts;Integrated Security=True" SettingsObjectName="TravelExpertsLoginPage.Properties.Settings" SettingsPropertyName="TravelExpertsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Agents" Member="Agents">
+    <Type Name="Agent">
+      <Column Name="AgentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AgtFirstName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgtMiddleInitial" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="AgtLastName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgtBusPhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgtEmail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AgtPosition" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgencyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TravelExperts" Class="PackageDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost\Bachirsql;Initial Catalog=TravelExperts;Integrated Security=True" SettingsObjectName="CMPP248VB.Properties.Settings" SettingsPropertyName="TravelExpertsConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Agents" Member="Agents">
+    <Type Name="Agent">
+      <Column Name="AgentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AgtFirstName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgtMiddleInitial" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="AgtLastName" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgtBusPhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgtEmail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AgtPosition" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AgencyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Agent_Customer" Member="Customers" ThisKey="AgentId" OtherKey="AgentId" Type="Customer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BookingDetails" Member="BookingDetails">
+    <Type Name="BookingDetail">
+      <Column Name="BookingDetailId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ItineraryNo" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TripStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TripEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Destination" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="BasePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="AgencyCommission" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BookingId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionId" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="ClassId" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="FeeId" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ProductSupplierId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Products_Supplier_BookingDetail" Member="Products_Supplier" ThisKey="ProductSupplierId" OtherKey="ProductSupplierId" Type="Products_Supplier" IsForeignKey="true" />
+      <Association Name="Booking_BookingDetail" Member="Booking" ThisKey="BookingId" OtherKey="BookingId" Type="Booking" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Packages" Member="Packages">
+    <Type Name="Package">
+      <Column Name="PackageId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PkgName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PkgStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PkgEndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PkgDesc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PkgBasePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PkgAgencyCommission" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ImageFile" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Package_Packages_Products_Supplier" Member="Packages_Products_Suppliers" ThisKey="PackageId" OtherKey="PackageId" Type="Packages_Products_Supplier" />
+      <Association Name="Package_Booking" Member="Bookings" ThisKey="PackageId" OtherKey="PackageId" Type="Booking" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Packages_Products_Suppliers" Member="Packages_Products_Suppliers">
+    <Type Name="Packages_Products_Supplier">
+      <Column Name="PackageId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductSupplierId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Package_Packages_Products_Supplier" Member="Package" ThisKey="PackageId" OtherKey="PackageId" Type="Package" IsForeignKey="true" />
+      <Association Name="Products_Supplier_Packages_Products_Supplier" Member="Products_Supplier" ThisKey="ProductSupplierId" OtherKey="ProductSupplierId" Type="Products_Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Products" Member="Products">
+    <Type Name="Product">
+      <Column Name="ProductId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProdName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Product_Products_Supplier" Member="Products_Suppliers" ThisKey="ProductId" OtherKey="ProductId" Type="Products_Supplier" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Products_Suppliers" Member="Products_Suppliers">
+    <Type Name="Products_Supplier">
+      <Column Name="ProductSupplierId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupplierId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Products_Supplier_BookingDetail" Member="BookingDetails" ThisKey="ProductSupplierId" OtherKey="ProductSupplierId" Type="BookingDetail" />
+      <Association Name="Products_Supplier_Packages_Products_Supplier" Member="Packages_Products_Suppliers" ThisKey="ProductSupplierId" OtherKey="ProductSupplierId" Type="Packages_Products_Supplier" />
+      <Association Name="Product_Products_Supplier" Member="Product" ThisKey="ProductId" OtherKey="ProductId" Type="Product" IsForeignKey="true" />
+      <Association Name="Supplier_Products_Supplier" Member="Supplier" ThisKey="SupplierId" OtherKey="SupplierId" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Suppliers" Member="Suppliers">
+    <Type Name="Supplier">
+      <Column Name="SupplierId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SupName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Supplier_Products_Supplier" Member="Products_Suppliers" ThisKey="SupplierId" OtherKey="SupplierId" Type="Products_Supplier" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustFirstName" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="CustLastName" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="CustAddress" Type="System.String" DbType="NVarChar(75) NOT NULL" CanBeNull="false" />
+      <Column Name="CustCity" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustProv" Type="System.String" DbType="NVarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="CustPostal" Type="System.String" DbType="NVarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="CustCountry" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="CustHomePhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CustBusPhone" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CustEmail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AgentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustUsername" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CustPassword" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Customer_Booking" Member="Bookings" ThisKey="CustomerId" OtherKey="CustomerId" Type="Booking" />
+      <Association Name="Agent_Customer" Member="Agent" ThisKey="AgentId" OtherKey="AgentId" Type="Agent" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Bookings" Member="Bookings">
+    <Type Name="Booking">
+      <Column Name="BookingId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookingDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BookingNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TravelerCount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CustomerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TripTypeId" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="PackageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Booking_BookingDetail" Member="BookingDetails" ThisKey="BookingId" OtherKey="BookingId" Type="BookingDetail" />
+      <Association Name="Customer_Booking" Member="Customer" ThisKey="CustomerId" OtherKey="CustomerId" Type="Customer" IsForeignKey="true" />
+      <Association Name="Package_Booking" Member="Package" ThisKey="PackageId" OtherKey="PackageId" Type="Package" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
